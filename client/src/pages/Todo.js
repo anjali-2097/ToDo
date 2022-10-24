@@ -63,9 +63,9 @@ async function loginUser() {
         return;
     }
     const newToDoList = [...todos,{checked: false, text:todotext}]
-    setToDos(newToDoList)
-    setToDoText("");
     saveToDo(newToDoList);
+    fetchToDo();
+    setToDoText("");
   }
   const toggleToDo = (id) => {
       const newToDo = [...todos];
@@ -126,7 +126,9 @@ async function loginUser() {
             </div>
         ))}
         <form onSubmit={addToDo}>
+        {(filter!=="Completed")&&(
         <input type="text" value={todotext} onChange={(e) =>  setToDoText(e.target.value)}/>
+        )}
         </form>
         {(filter==="Completed")&&(
             <button className="custom_del" onClick={del_all_task}>Del</button>
