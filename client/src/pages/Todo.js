@@ -97,14 +97,20 @@ async function loginUser() {
     setFilter(newFilter);
   }
   const del_task = (e) => {
-    const updatedToDoList = todos.filter((todo) => todo._id !== (e.target.value))
-    setToDos(updatedToDoList);
-    saveToDo(updatedToDoList);
+    const response = window.confirm("Are you sure you want to delete the task?");
+    if (response) {
+        const updatedToDoList = todos.filter((todo) => todo._id !== (e.target.value))
+        setToDos(updatedToDoList);
+        saveToDo(updatedToDoList);
+    }
   }
   const del_all_task = (e) => {
-    const updatedToDoList = todos.filter((todo) => todo.checked !== true)
-    setToDos(updatedToDoList);
-    saveToDo(updatedToDoList);
+    const response = window.confirm("Are you sure you want to delete all the tasks?");
+    if (response) {
+      const updatedToDoList = todos.filter((todo) => todo.checked !== true)
+      setToDos(updatedToDoList);
+      saveToDo(updatedToDoList);
+    }
   }
   return (
     <div className="todo">
@@ -120,7 +126,7 @@ async function loginUser() {
             <div key={todo._id+todo.text} className="todo-list">
                 <input onChange={() => toggleToDo(todo._id)} id={todo._id+todo.text} checked={todo.checked} className="to-do-check" type="checkbox"/>
                 <label htmlFor={todo._id+todo.text}>{todo.text}</label>
-                {(filter==="Completed")&&(
+                {(filter==="Completed" && (todo._id!==null))&&(
                     <button className="custom_del" onClick={del_task} value={todo._id}>Del</button>
                 )}
             </div>
@@ -131,7 +137,7 @@ async function loginUser() {
         )}
         </form>
         {(filter==="Completed")&&(
-            <button className="custom_del" onClick={del_all_task}>Del</button>
+            <button className="custom_del" onClick={del_all_task}>Del All</button>
         )}
     </div>
   )
