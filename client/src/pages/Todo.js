@@ -116,7 +116,7 @@ async function loginUser() {
     <div className="todo">
         <h1 className='heading'>ToDo List</h1>
         <div className="select_tag">
-            <select onChange={(e) => changeFilter(e.target.value)}>
+            <select onChange={(e) => changeFilter(e.target.value)} className="custom_select">
               <option value="All">All</option>
               <option value="Active">Active</option>
               <option value="Completed">Completed</option>
@@ -133,11 +133,13 @@ async function loginUser() {
         ))}
         <form onSubmit={addToDo}>
         {(filter!=="Completed")&&(
-        <input type="text" value={todotext} onChange={(e) =>  setToDoText(e.target.value)}/>
+        <input placeholder="Enter the task you want to add and press enter" type="text" value={todotext} onChange={(e) =>  setToDoText(e.target.value)}/>
         )}
         </form>
         {(filter==="Completed")&&(
-            <button className="custom_del" onClick={del_all_task}>Del All</button>
+          <div className="custom_delall">
+            <button onClick={del_all_task}>Del All</button>
+          </div>
         )}
     </div>
   )
