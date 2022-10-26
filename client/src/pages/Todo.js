@@ -6,7 +6,7 @@ import './styles.todo.css';
 function Todo() {
 const [user,setUser] = useState({});
 const [errormsg,setErrormsg] = useState('');
-const [todos,setToDos] = useState([{checked:false, text: "hello"}]);
+const [todos,setToDos] = useState([{checked:false, text: "Hello"}]);
 const [todotext,setToDoText] = useState('');
 const [searchtext,setSearchText] = useState('');
 const [filter,setFilter] = useState('All');

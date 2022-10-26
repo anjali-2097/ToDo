@@ -269,8 +269,10 @@ const getToDo=async (req,res)=>{
         return res.status(400).json("user doesnotexist relogin");
     }
     let todoexists =await ToDoList.findOne({userId: id}).exec();
-      return res.status(200)
-      .json({todos:todoexists.todos});
+      if(todoexists){
+        return res.status(200)
+        .json({todos:todoexists.todos});
+      }
 }
 else{
     let existuser1=await Googleuser.findById(id)
@@ -282,8 +284,10 @@ else{
         return res.status(400).json("user doesnotexist relogin");
     }
     let todoexists =await ToDoList.findOne({userId: id}).exec();
-    return res.status(200)
-    .json({todos:todoexists.todos});
+    if(todoexists){
+      return res.status(200)
+      .json({todos:todoexists.todos});
+    }  
 }
 }
 module.exports={usercreation,userlogin,getUser,googleusercreation,userUpdatation,saveToDo,getToDo}
