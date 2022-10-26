@@ -103,7 +103,7 @@ useEffect(()=>{
                <button onClick={submit}>Submit</button>
                }
                </p>
-               <div>
+               <div className="view-logout">
                <button onClick={view_todo}>View To-do</button>
               <button onClick={logoutuser}>Logout</button>
                </div>

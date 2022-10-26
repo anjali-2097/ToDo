@@ -9,6 +9,11 @@
 }
 p {
     font-size: x-large;
+    background-color: white;
+  }
+  .view-logout{
+    background-color: white;
+    padding-bottom: 20px;
   }
 img{
     height: 184px;

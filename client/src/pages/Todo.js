@@ -8,6 +8,7 @@ const [user,setUser] = useState({});
 const [errormsg,setErrormsg] = useState('');
 const [todos,setToDos] = useState([{checked:false, text: "hello"}]);
 const [todotext,setToDoText] = useState('');
+const [searchtext,setSearchText] = useState('');
 const [filter,setFilter] = useState('All');
 
 const navigate = useNavigate();
@@ -115,6 +116,9 @@ async function loginUser() {
   return (
     <div className="todo">
         <h1 className='heading'>ToDo List</h1>
+        <div>
+          <input type="text" placeholder="Search for task..." onChange={(e) => setSearchText(e.target.value)}/>
+        </div>
         <div className="select_tag">
             <select onChange={(e) => changeFilter(e.target.value)} className="custom_select">
               <option value="All">All</option>
@@ -122,7 +126,13 @@ async function loginUser() {
               <option value="Completed">Completed</option>
             </select>
         </div>
-        { getToDos().map((todo) => (
+        { getToDos().filter((value)=>{
+          if(searchtext===""){
+            return value
+          }else if(value.text.toLowerCase().includes(searchtext.toLowerCase())){
+            return value
+          }
+        }).map((todo) => (
             <div key={todo._id+todo.text} className="todo-list">
                 <input onChange={() => toggleToDo(todo._id)} id={todo._id+todo.text} checked={todo.checked} className="to-do-check" type="checkbox"/>
                 <label htmlFor={todo._id+todo.text}>{todo.text}</label>
