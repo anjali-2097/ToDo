@@ -113,6 +113,13 @@ async function loginUser() {
       saveToDo(updatedToDoList);
     }
   }
+  function todoClassName(todoStatus){
+    if(todoStatus===true){
+      return 'todo-list completed';
+    }else{
+      return 'todo-list active';
+    }
+  }
   return (
     <div className="todo">
         <h1 className='heading'>ToDo List</h1>
@@ -133,7 +140,7 @@ async function loginUser() {
             return value
           }
         }).map((todo) => (
-            <div key={todo._id+todo.text} className="todo-list">
+            <div key={todo._id+todo.text} className={todoClassName(todo.checked)}>
                 <input onChange={() => toggleToDo(todo._id)} id={todo._id+todo.text} checked={todo.checked} className="to-do-check" type="checkbox"/>
                 <label htmlFor={todo._id+todo.text}>{todo.text}</label>
                 {(filter==="Completed" && (todo._id!==null))&&(
