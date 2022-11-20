@@ -5,10 +5,12 @@ const app=express();
 const cors = require("cors");
 const bodyParser=require('body-parser');
 const authroute=require('./routes/authroute');
+const path = require('path');
 app.use(cors());
 app.use(bodyParser.json()); 
 app.use(express.json());
 require("dotenv").config();
+app.use('/static',express.static(path.join(__dirname,'IMG')));
 
 app.use("/",authroute);
 const connector=async ()=>{

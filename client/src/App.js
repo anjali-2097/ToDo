@@ -3,11 +3,13 @@ import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
 import Home from "./pages/Home";
 import Todo from "./pages/Todo";
+import Album from "./pages/Album";
+
 function App() {
 	return (
 		<div className="container">
 			<Routes>
-      <Route
+      			<Route
 					exact
 					path="/"
 					element={<Login />}
@@ -30,6 +32,11 @@ function App() {
 				<Route
 					path="/signup"
 					element={<Signup />}
+				/>
+				<Route
+					exact
+					path="/album"
+					element={<Album />}
 				/>
 			</Routes>
 		</div>

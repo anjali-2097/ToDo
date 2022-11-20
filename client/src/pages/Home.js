@@ -1,4 +1,4 @@
-import { Link,useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from 'react'
 import axios from 'axios';
 import "./style.home.css";
@@ -43,8 +43,11 @@ useEffect(()=>{
   }
   function view_todo() {
     navigate('/todo')
-    
-  }	
+  }
+  function album(){
+    navigate('/album')
+  }
+
   async function submit() {
     
     const token=localStorage.getItem('token');
@@ -103,7 +106,10 @@ useEffect(()=>{
                <button onClick={submit}>Submit</button>
                }
                </p>
+               <p>
+               </p>
                <div className="view-logout">
+               <button onClick={album}>Album</button>
                <button onClick={view_todo}>View To-do</button>
               <button onClick={logoutuser}>Logout</button>
                </div>

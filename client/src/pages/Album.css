@@ -1,0 +1,78 @@
+.searchContainer{
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.card {
+  position: relative;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+}
+
+.text button{
+  margin-right: 2px !important;
+}
+
+.image_form{
+  display: flex;
+}
+.image_form input{
+  margin-left: 10px;
+}
+.submit_btn{
+  background-color: #b973d5;
+  background-image: linear-gradient(45deg,#6f328f,#9908ac);
+  color: white;
+}
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.card:hover .image {
+  opacity: 1;
+}
+
+.card:hover .middle {
+  opacity: 1;
+}
+
+.imagebtn{
+  width: auto;
+}
+
+.text{
+  background-color: white !important;
+}
+
+.containercard{
+  column-count: 3;
+}
+
+.text {
+  display: inline-flex;
+  font-size: 16px;
+}
+
+.container{
+  max-width: 75% !important;
+}

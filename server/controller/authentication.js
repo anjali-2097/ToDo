@@ -47,6 +47,7 @@ const usercreation=async (req,res)=>{
 const userlogin=async (req,res,next)=>{
     try{
     const {email,password}=req.body;
+    console.log("dbudbbcd",email,password);
     if( !email || !password){
         return res
         .status(400)
@@ -223,7 +224,7 @@ const userUpdatation=async (req,res)=>{
             return res.status(400).json("user doesnotexist relogin");
            
         }
-        existuser=await Googleuser.findByIdAndUpdate(id,{...update},{new: true});
+        existuser1=await Googleuser.findByIdAndUpdate(id,{...update},{new: true});
         console.log(existuser1);
         return res.status(200)
         .json({user:existuser1});

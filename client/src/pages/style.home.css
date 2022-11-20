@@ -14,6 +14,8 @@ p {
   .view-logout{
     background-color: white;
     padding-bottom: 20px;
+    display: flex;
+    margin: 10px;
   }
 img{
     height: 184px;
