@@ -33,10 +33,22 @@
     width: 5% !important;
     cursor: pointer;
 }
+.active{
+    background-color: rgb(240, 168, 168);
+}
+.active > label{
+    background-color: rgb(240, 168, 168);
+}
+.completed{
+    background-color: rgb(47 212 80);
+}
+.completed > label{
+    background-color: rgb(47 212 80);
+}
 .todo-list{
-    background-color: white;
     font-size: larger;
     padding-top: 12px;
+    border: 1;
 }
 .custom_del{
     margin-left: 15px;
