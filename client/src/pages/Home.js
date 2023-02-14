@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from 'react'
 import axios from 'axios';
-import "./style.home.css";
+import Header from './Header';
+
 function Home() {
   
   const [user,setUser] = useState({});
@@ -10,10 +11,6 @@ function Home() {
   const [errormsg,setErrormsg] = useState('');
   const navigate = useNavigate();
 
- function logoutuser() {
-  localStorage.setItem('token',"");
-  navigate('/login');
-  }
 useEffect(()=>{
     loginUser();
 },[]);
@@ -40,12 +37,6 @@ useEffect(()=>{
     console.log(e);
     navigate('/login');
   }
-  }
-  function view_todo() {
-    navigate('/todo')
-  }
-  function album(){
-    navigate('/album')
   }
 
   async function submit() {
@@ -75,46 +66,85 @@ useEffect(()=>{
   }
   }
 	return (
-        <div className="home-page">
-               <p>User Name: {user.name}</p>
-               { edit ? (
-                <div>
-                <input type="text" value={edituser.name} onChange={(e) => setEditUser({...edituser,name:e.target.value})}></input>
-                </div>
+    <div>
+    <Header/>
+    <section className="text-gray-600 body-font">
+<div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+<img className="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src={user.profilePicture}></img>
+{ edit && (
+  <div className="w-full p-6 m-auto">
+  <label
+      htmlFor="profile-pic"
+      className="block text-sm font-semibold text-gray-800"
+  >
+      Profile Picture URL
+  </label>
+  <input
+      type="url"
+      value={edituser.profilePicture} onChange={(e) => setEditUser({...edituser,profilePicture:e.target.value})}
+      className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+  />
+</div>
+               
+               )
+
+               }
+<div className="text-center lg:w-2/3 w-full">
+  <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Name: {user.name}</h1>
+  { edit ? (
+                <div className="w-full p-6 m-auto">
+                <label
+                    htmlFor="username"
+                    className="block text-sm font-semibold text-gray-800"
+                >
+                    User Name
+                </label>
+                <input
+                    type="text"
+                    value={edituser.name} onChange={(e) => setEditUser({...edituser,name:e.target.value})}
+                    className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                />
+              </div>
                ):""
 
                }
-               <p>Email:  {user.email} </p>
-               { edit && (
-                <div>
-                <input type="text" value={ edituser.email} onChange={(e) => setEditUser({...edituser,email:e.target.value})}></input>
-                </div>
+  <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Email: {user.email}</h1>
+  { edit && (
+                <div className="w-full p-6 m-auto">
+                <label
+                    htmlFor="email"
+                    className="block text-sm font-semibold text-gray-800"
+                >
+                    Email
+                </label>
+                <input
+                    type="text"
+                    value={edituser.email} onChange={(e) => setEditUser({...edituser,email:e.target.value})}
+                    className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                />
+              </div>
                )
 
                }
-               <p><img src={user.profilePicture}></img></p>
-               { edit && (
-                <div>
-                <input type="text" value={edituser.profilePicture} onChange={(e) => setEditUser({...edituser,profilePicture:e.target.value})}></input>
-                </div>
-               )
-
-               }
-               <p>Last Active: {user.lastActive}</p>
-               <p><button onClick={()=>{setEdit(!edit)}}>{ edit ? "Back" : "Edit"}</button>
-               { edit &&
-               <button onClick={submit}>Submit</button>
-               }
-               </p>
-               <p>
-               </p>
-               <div className="view-logout">
-               <button onClick={album}>Album</button>
-               <button onClick={view_todo}>View To-do</button>
-              <button onClick={logoutuser}>Logout</button>
+  <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Last Active: {user.lastActive}</h1>
+</div>
+<div className="flex space-x-2 justify-center">
+  <div className="flex p-6 space-x-2 justify-center">
+    <button data-mdb-ripple="true"
+    data-mdb-ripple-color="light" className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" onClick={()=>{setEdit(!edit)}}>{ edit ? "Back" : "Edit"}</button>
                </div>
-              
-      </div>
+               { edit &&
+               <div className="flex p-6 space-x-2 justify-center">
+               <button data-mdb-ripple="true"
+    data-mdb-ripple-color="light"
+    className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" onClick={submit}>Submit</button>
+               </div>
+               }
+               </div>
+</div>
+</section>
+</div>
+        
 	);
   
 }

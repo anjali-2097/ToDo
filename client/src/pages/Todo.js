@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import {useEffect, useState} from 'react'
+import Header from "./Header";
 import axios from 'axios';
-import './styles.todo.css';
 
 function Todo() {
 const [user,setUser] = useState({});
@@ -115,24 +115,60 @@ async function loginUser() {
   }
   function todoClassName(todoStatus){
     if(todoStatus===true){
-      return 'todo-list completed';
+      return 'block px-6 py-2 border-b border-gray-200 w-full rounded-t-lg bg-green-300 text-black cursor-pointer';
     }else{
-      return 'todo-list active';
+      return 'block px-6 py-2 border-b border-gray-200 w-full rounded-t-lg bg-red-300 text-black cursor-pointer';
     }
   }
   return (
-    <div className="todo">
-        <h1 className='heading'>ToDo List</h1>
-        <div>
-          <input type="text" placeholder="Search for task..." onChange={(e) => setSearchText(e.target.value)}/>
+    <>
+    <Header></Header>
+        <div className="container px-5 py-12 mx-auto">
+        <div className="px-2 py-2">
+      <div className="relative border-2 flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+          <div className="grid place-items-center h-full w-12 text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+          </div>
+          <input
+          className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
+          type="text"
+          id="search"
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Search something.." /> 
+      </div>
+  </div>
         </div>
-        <div className="select_tag">
-            <select onChange={(e) => changeFilter(e.target.value)} className="custom_select">
-              <option value="All">All</option>
-              <option value="Active">Active</option>
-              <option value="Completed">Completed</option>
-            </select>
-        </div>
+        <div className="flex justify-center">
+  <div className="mb-4 xl:w-96">
+    <select className="form-select appearance-none
+      block
+      w-full
+      px-3
+      py-1.5
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding bg-no-repeat
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+      defaultValue={'DEFAULT'}
+      onChange={(e) => changeFilter(e.target.value)} 
+      >
+        <option value="DEFAULT" disabled>Filter Tasks</option>
+        <option value="All">All</option>
+        <option value="Active">Active</option>
+        <option value="Completed">Completed</option>
+    </select>
+  </div>
+</div>
+<div className="flex justify-center">
+  <div className="bg-white rounded-lg border border-gray-200 w-5/6 text-gray-900">
         { getToDos().filter((value)=>{
           if(searchtext===""){
             return value
@@ -140,25 +176,39 @@ async function loginUser() {
             return value
           }
         }).map((todo) => (
-            <div key={todo._id+todo.text} className={todoClassName(todo.checked)}>
-                <input onChange={() => toggleToDo(todo._id)} id={todo._id+todo.text} checked={todo.checked} className="to-do-check" type="checkbox"/>
+          
+            <div key={todo._id+todo.text} aria-current="true" className={todoClassName(todo.checked)} onClick={() => toggleToDo(todo._id)} id={todo._id+todo.text} checked={todo.checked}>
                 <label htmlFor={todo._id+todo.text}>{todo.text}</label>
                 {(filter==="Completed" && (todo._id!==null))&&(
                     <button className="custom_del" onClick={del_task} value={todo._id}>Del</button>
                 )}
             </div>
+            
         ))}
+        </div>
+          </div>
         <form onSubmit={addToDo}>
         {(filter!=="Completed")&&(
-        <input placeholder="Enter the task you want to add and press enter" type="text" value={todotext} onChange={(e) =>  setToDoText(e.target.value)}/>
+          <div className="container px-5 py-12 mx-auto">
+         
+          <input
+              placeholder="Enter the task you want to add and press enter"
+              type="text" value={todotext} onChange={(e) =>  setToDoText(e.target.value)}
+              className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+          />
+      </div>
+       
         )}
         </form>
         {(filter==="Completed")&&(
-          <div className="custom_delall">
-            <button onClick={del_all_task}>Del All</button>
+          <div className="flex p-6 justify-center">
+            <button data-mdb-ripple="true"
+    data-mdb-ripple-color="light"
+    className="inline-block px-6 py-2.5 bg-red-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out" onClick={del_all_task}>Del All</button>
           </div>
         )}
-    </div>
+    
+    </>
   )
 
 
